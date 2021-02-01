@@ -38,19 +38,41 @@ end
 # Part 2
 
 def hello(name)
-  # YOUR CODE HERE
+  return "Hello, " + name
 end
 
 def starts_with_consonant? s
-  # YOUR CODE HERE
+  if((s=~/[a-z]/i) == 0)
+    return !((s=~/[aeiou]/i) == 0)
+  end
+  return false
 end
 
 def binary_multiple_of_4? s
-  # YOUR CODE HERE
+  if((s=~/[^01]/i) != nil)    #return false if not a binary string
+    return false
+  end
+  if(s.length < 2)            #return if only one character in string
+    return s == "0"
+  end
+  return s[-2, 2] == "00"
 end
 
 # Part 3
 
 class BookInStock
-# YOUR CODE HERE
+  def initialize(isbn, price)
+    raise ArgumentError.new(
+      "Expected ISBN cannot be empty string and price cannot be <= 0"
+      ) if isbn.length == 0 || price <= 0
+    @isbn = isbn
+    @price = price
+  end
+  
+  attr_accessor :isbn, :price   #apply getters and setters to instance variables
+  
+  def price_as_string
+    "$%0.2f" % [@price]
+  end
+  
 end
